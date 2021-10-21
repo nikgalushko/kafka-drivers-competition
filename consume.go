@@ -13,7 +13,7 @@ type Consumer interface {
 	Consume(func([]byte) bool) error
 }
 
-func initSaramaCluster(groupID string, addr []string, topic string) Consumer {
+func initSarama(groupID string, addr []string, topic string) Consumer {
 	ret, err := sarama.NewConsumer(groupID, addr, topic)
 	if err != nil {
 		panic(fmt.Sprintf("sarama: %s", err.Error()))
@@ -51,8 +51,8 @@ func consume() {
 	}()
 
 	consumers := map[string]func(string, []string, string) Consumer{
-		"sarama-cluster": initSaramaCluster,
-		"segmentio":      initSegmentio,
+		"sarama":    initSarama,
+		"segmentio": initSegmentio,
 	}
 
 	PrintMemUsage("before test")

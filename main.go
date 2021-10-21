@@ -21,7 +21,7 @@ func main() {
 	flag.StringVar(&brokers, "brokers", "0.0.0.0:9092", "broker addresses, comma-separated")
 	flag.StringVar(&strategy, "strategy", "produce", "produce, consume")
 	flag.IntVar(&records, "records", 250000, "number of records to read from kafka")
-	flag.StringVar(&driver, "driver", "segmentio", "segmentio,sarama-cluster")
+	flag.StringVar(&driver, "driver", "segmentio", "segmentio,sarama")
 	flag.Parse()
 
 	fmt.Println("Strategy: ", strategy, "Records:", records, "Driver:", driver)

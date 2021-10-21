@@ -15,7 +15,7 @@ type Producer interface {
 	Close()
 }
 
-func initSaramaClusterProducer(addr []string) Producer {
+func initSaramaProducer(addr []string) Producer {
 	ret, err := sarama.NewProducer(addr)
 	if err != nil {
 		panic(fmt.Sprintf("sarama: %s", err.Error()))
@@ -35,8 +35,8 @@ func initSegmentioProducer(addr []string) Producer {
 
 func produce() {
 	producers := map[string]func([]string) Producer{
-		"sarama-cluster": initSaramaClusterProducer,
-		"segmentio":      initSegmentioProducer,
+		"sarama":    initSaramaProducer,
+		"segmentio": initSegmentioProducer,
 	}
 
 	PrintMemUsage("before test")
